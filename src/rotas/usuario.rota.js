@@ -37,16 +37,12 @@ router.post('/', async (req, res) =>{
 })
 
 // Putters
-router.put('/:id', async (req, res) => {
-    const usuario = await Usuarios.findByPk(req.params.id)
+router.put('/', async (req, res) => {
+    const usuario = await Usuarios.findByPk(req.query.id)
     if(usuario){
-        const nome = req.body.nome
-        const email = req.body.email
-        const senha = req.body.senha
-
-        usuario.nome = nome;
-        usuario.email = email;
-        usuario.senha = senha;
+        usuario.nome = req.body.nome;
+        usuario.email = req.body.email;
+        usuario.senha = req.body.senha;
 
         await usuario.save();
         res.json({msg: 'Usuario Atualizado'})
@@ -57,8 +53,8 @@ router.put('/:id', async (req, res) => {
 
 // Deletes
 // Deleta um usuario pelo id
-router.delete('/:id', async (req, res) => {
-    const usuario = await Usuarios.findByPk(req.params.id)
+router.delete('/', async (req, res) => {
+    const usuario = await Usuarios.findByPk(req.query.id)
     if(usuario){
         await usuario.destroy();
         res.json({msg: 'Usuario deletado'})
