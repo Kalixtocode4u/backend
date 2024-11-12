@@ -14,7 +14,18 @@ backend da aplicação Pse
  npm install
 ```
 
-4. abra o servidor no modo desenvolvimento
+4. abra seu banco de dados mysql
+
+5. realize umas modificações no arquivo no src/db/config/config.json coloque o seu user e password do seu banco de dados
+
+6. crie o banco de dados pelo node cmd
+
+```
+npx sequelize-cli db:create
+npx sequelize-cli db:migrate
+```
+
+7. abra o servidor no modo desenvolvimento
 
 ```
  npm run dev
