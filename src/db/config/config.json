@@ -1,0 +1,24 @@
+{
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "db_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "",
+    "password": null,
+    "database": "pse_db",
+    "host": "127.0.0.1",
+    "dialect": "sqlite",
+    "storage": "./src/db/db.sqlite"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}

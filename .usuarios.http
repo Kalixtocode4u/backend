@@ -1,0 +1,35 @@
+GET http://localhost:5000
+
+###
+
+GET http://localhost:5000/usuarios
+
+###
+
+GET http://localhost:5000/usuarios/1
+
+###
+
+POST http://localhost:5000/usuarios
+content-type: application/json
+
+{
+    "nome": "Carlos",
+    "email": "calopedr@email.com",
+    "senha": "segredo"
+}
+
+###
+
+PUT http://localhost:5000/usuarios/1
+content-type: application/json
+
+{
+    "nome": "jamlão",
+    "email": "jamajama@email.com",
+    "senha": "secreto"
+}
+
+###
+
+DELETE http://localhost:5000/usuarios/1

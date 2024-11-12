@@ -1,0 +1,17 @@
+GET http://localhost:5000
+
+###
+
+GET http://localhost:5000/produtos
+
+###
+
+POST http://localhost:5000/produtos
+content-type: application/json
+
+{
+    "nome": "ventiladores",
+    "descricao": "bitania",
+    "quantidade": 40,
+    "preco": 49.5,
+}
