@@ -3,6 +3,7 @@ const rotaUsuario = require('./rotas/usuario.rota')
 const rotaProduto = require('./rotas/produto.rota')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+require('dotenv').config()
 
 const app = express();
 

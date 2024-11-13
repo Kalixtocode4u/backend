@@ -14,20 +14,30 @@ POST http://localhost:5000/usuarios
 content-type: application/json
 
 {
-    "nome": "Carlos",
-    "email": "calopedr@email.com",
-    "senha": "segredo"
+    "nome": "karam",
+    "email": "readit@email.com",
+    "senha": "salgado"
 }
 
 ###
 
-PUT http://localhost:5000/usuarios?id=2
+POST http://localhost:5000/usuarios/login
 content-type: application/json
 
 {
-    "nome": "jamlão",
-    "email": "jamajama@email.com",
-    "senha": "secreto"
+    "email": "filmeDoPele@email.com",
+    "senha": "hexacampeao"
+}
+
+###
+
+PUT http://localhost:5000/usuarios?id=4
+content-type: application/json
+
+{
+    "nome": "Brasil",
+    "email": "filmeDoPele@email.com",
+    "senha": "hexacampeao"
 }
 
 ###

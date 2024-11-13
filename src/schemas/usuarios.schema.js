@@ -5,6 +5,6 @@ module.exports = {
         email: {type: "string", format: "email"},
         senha: {type: "string"}
     },
-    required: ["nome", "email", "senha"],
+    required: ["email", "senha"],
     additionalProperties: false,
 }
