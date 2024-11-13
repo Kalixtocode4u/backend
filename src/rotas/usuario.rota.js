@@ -11,16 +11,15 @@ router.put('/', usuarioMid)
 // Getters
 // Obtem todos os Usuarios
 router.get('/', async (req, res) => {
-    await Usuarios.findAll()
-        .then(data => res.json(data))
-        .catch(err => res.status(500).json({msg: 'Erro: ' + err}))
+    const usuarios =  await Usuarios.findAll()
+    res.json(usuarios)
 })
 
 // Obtem um usuario pelo id
 router.get('/:id', async (req, res) => {
     const usuario = await Usuarios.findByPk(req.params.id)
     if(usuario){
-        res.json({usuarios: usuario})
+        res.json({usuario: usuario})
     }else{
         res.status(400).json({msg: 'Usuario não encontrado'})
     }
@@ -58,6 +57,7 @@ router.post('/login', async (req, res) =>{
 })
 
 // Putters
+// Atualiza os dados de um usuario
 router.put('/', async (req, res) => {
     const usuario = await Usuarios.findByPk(req.query.id)
     if(usuario){
@@ -77,7 +77,7 @@ router.put('/', async (req, res) => {
     }
 })
 
-// Deletes
+// Deleters
 // Deleta um usuario pelo id
 router.delete('/', async (req, res) => {
     const usuario = await Usuarios.findByPk(req.query.id)

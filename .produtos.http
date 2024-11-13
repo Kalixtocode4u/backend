@@ -6,12 +6,32 @@ GET http://localhost:5000/produtos
 
 ###
 
+GET http://localhost:5000/produtos/2
+
+###
+
 POST http://localhost:5000/produtos
 content-type: application/json
 
 {
-    "nome": "ventiladores",
+    "nome": "umidificador",
+    "descricao": "bahia",
+    "quantidade": 10,
+    "preco": 79.50
+}
+
+###
+
+PUT http://localhost:5000/produtos?id=1
+content-type: application/json
+
+{
+    "nome": "ventilador",
     "descricao": "bitania",
     "quantidade": 40,
-    "preco": 49.5,
+    "preco": 49.95
 }
+
+###
+
+DELETE http://localhost:5000/produtos?id=1

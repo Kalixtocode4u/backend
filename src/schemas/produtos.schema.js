@@ -4,7 +4,7 @@ module.exports = {
         nome: {type: "string"},
         descricao:{type:"string"},
         quantidade:{type: "integer"},
-        preco:{type: "real"},
+        preco:{type: "number"}
     },
     required: ["nome", "descricao", "quantidade", "preco"],
     additionalProperties: false,
