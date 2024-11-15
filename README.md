@@ -41,9 +41,3 @@ npx sequelize-cli db:migrate
 ```
 
 8. Realize requisições nos arquivos .http
-
-isso que tem o createAt do profuto
-"2024-11-13T23:44:58.000Z"
-
-isso que tem no dt_pedido
-"2024-11-15T16:15:55.350Z"
