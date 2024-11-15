@@ -8,13 +8,13 @@ router.post('/', produtoMid)
 router.put('/', produtoMid)
 
 // Getters
-// Obtem todos os Usuarios
+// Obtem todos os produtos
 router.get('/', async (req, res) => {
     const produtos = await Produtos.findAll()
     res.json(produtos)
 })
 
-// Obtem um usuario pelo id
+// Obtem um produto pelo id
 router.get('/:id', async (req, res) => {
     const produto = await Produtos.findByPk(req.params.id)
     if(produto){
@@ -25,7 +25,7 @@ router.get('/:id', async (req, res) => {
 })
 
 // Posters
-// Registra um usuario
+// Registra um produto
 router.post('/', async (req, res) =>{
     const nome = req.body.nome
     const descricao = req.body.descricao
@@ -35,14 +35,14 @@ router.post('/', async (req, res) =>{
     const produto = {nome: nome, descricao: descricao, quantidade: quantidade, preco: preco}
     try {
         const produtoSalvo = await Produtos.create(produto)
-        res.json({msg: 'Produto adicionado com sucesso', userId: produtoSalvo.id})
+        res.json({msg: 'Produto adicionado com sucesso', produtoId: produtoSalvo.id})
     } catch (error) {
-        next(new ErroHandler(500, 'falha interna ao adicionar o Produto'))
+        next(new ErroHandler(500, 'falha interna ao adicionar o produto'))
     }
 })
 
-// Putters
-// Atualiza os dados de um usuario
+// Puts
+// Atualiza os dados de um produto
 router.put('/', async (req, res) =>{
     const produto = await Produtos.findByPk(req.query.id)
     if(produto){
@@ -52,14 +52,14 @@ router.put('/', async (req, res) =>{
         produto.preco = req.body.preco
 
         await produto.save()
-        res.json({msg: 'Usuario Atualizado'})
+        res.json({msg: 'Produto Atualizado'})
     }else{
         res.status(400).json({msg: 'Produto não encontrado'})
     }
 })
 
 // Deleters
-// Deleta um usuario pelo id
+// Deleta um produto pelo id
 router.delete('/', async (req, res) =>{
     const produto = await Produtos.findByPk(req.query.id)
     if(produto){

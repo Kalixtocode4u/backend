@@ -1,6 +1,7 @@
 const express = require('express');
 const rotaUsuario = require('./rotas/usuario.rota')
 const rotaProduto = require('./rotas/produto.rota')
+const rotaPedido = require('./rotas/Pedido.rota')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 require('dotenv').config()
@@ -18,6 +19,8 @@ app.get('/', (req,res) => {
 app.use('/usuarios', rotaUsuario)
 
 app.use('/produtos', rotaProduto)
+
+app.use('/pedidos', rotaPedido)
 
 app.listen(5000, () => {
     console.log('servidor aberto na porta 5000')

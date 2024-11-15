@@ -56,7 +56,7 @@ router.post('/login', async (req, res) =>{
     }
 })
 
-// Putters
+// Puts
 // Atualiza os dados de um usuario
 router.put('/', async (req, res) => {
     const usuario = await Usuarios.findByPk(req.query.id)
