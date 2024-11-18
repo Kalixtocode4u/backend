@@ -2,15 +2,15 @@ GET http://localhost:5000
 
 ###
 
-GET http://localhost:5000/usuarios
+GET http://localhost:5000/api/usuarios
 
 ###
 
-GET http://localhost:5000/usuarios/1
+GET http://localhost:5000/api/usuarios/1
 
 ###
 
-POST http://localhost:5000/usuarios
+POST http://localhost:5000/api/usuarios
 content-type: application/json
 
 {
@@ -21,7 +21,7 @@ content-type: application/json
 
 ###
 
-POST http://localhost:5000/usuarios/login
+POST http://localhost:5000/api/usuarios/login
 content-type: application/json
 
 {
@@ -31,7 +31,7 @@ content-type: application/json
 
 ###
 
-PUT http://localhost:5000/usuarios?id=4
+PUT http://localhost:5000/api/usuarios?id=4
 content-type: application/json
 
 {
@@ -42,4 +42,4 @@ content-type: application/json
 
 ###
 
-DELETE http://localhost:5000/usuarios?id=1
+DELETE http://localhost:5000/api/usuarios?id=1

@@ -27,6 +27,17 @@ backend da aplicação Pse
 
 5. realize umas modificações no arquivo no src/db/config/config.json coloque o seu user e password do seu banco de dados
 
+```js
+{
+"development": {
+    "username": "root", // <----- ponhar seu usuario
+    "password": null, // <----- ponhar sua senha
+    "database": "test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
+```
 6. crie o banco de dados pelo node cmd
 
 ```
@@ -40,4 +51,4 @@ npx sequelize-cli db:migrate
  npm run dev
 ```
 
-8. Realize requisições nos arquivos .http
+8. Realize as requisições nos arquivos .http

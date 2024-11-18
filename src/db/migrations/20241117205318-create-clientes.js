@@ -2,39 +2,29 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Pedidos', {
+    await queryInterface.createTable('Clientes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      Dt_Pedido: {
+      cnpj: {
+        allowNull: false,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      cpf: {
         type: Sequelize.STRING
       },
-      produto_id: {
-        type: Sequelize.INTEGER
-      },
-      fornecedor_cod: {
-        type: Sequelize.INTEGER
-      },
-      taxa_cod: {
-        type: Sequelize.INTEGER
-      },
-      cliente_cod: {
-        type: Sequelize.INTEGER
-      },
-      transportadora_cod: {
-        type: Sequelize.INTEGER
-      },
-      frm_pagamento: {
+      nome: {
         type: Sequelize.STRING
       },
-      local: {
+      endereço: {
         type: Sequelize.STRING
       },
-      prioridade: {
-        type: Sequelize.INTEGER
+      contato: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -47,6 +37,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Pedidos');
+    await queryInterface.dropTable('Clientes');
   }
 };

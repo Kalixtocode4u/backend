@@ -10,15 +10,18 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Pedidos.belongsTo(models.Produtos, {foreignKey: 'produto_id'})
+      Pedidos.belongsTo(models.Fornecedores, {foreignKey: 'fornecedor_cnpj'})
+      //Pedidos.belongsTo(models.taxa, {foreignKey: taxa_cod})
+      Pedidos.belongsTo(models.Clientes, {foreignKey: 'cliente_cnpj'})
+      Pedidos.belongsTo(models.Transportadoras, {foreignKey: 'transportadora_cod'})
     }
   }
   Pedidos.init({
-    Dt_Pedido: DataTypes.STRING,
+    dt_Pedido: DataTypes.STRING,
     produto_id: DataTypes.INTEGER,
-    fornecedor_cod: DataTypes.INTEGER,
-    taxa_cod: DataTypes.INTEGER,
-    cliente_cod: DataTypes.INTEGER,
+    fornecedor_cnpj: DataTypes.INTEGER,
+    cliente_cnpj: DataTypes.INTEGER,
     transportadora_cod: DataTypes.INTEGER,
     frm_pagamento: DataTypes.STRING,
     local: DataTypes.STRING,

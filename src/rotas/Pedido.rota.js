@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const PedidoMid = require('../middleware/validarPedido.middleware')
-const { Pedidos } = require('../db/models')
+const { Pedidos, Transportadoras, Clientes, Fornecedores } = require('../db/models')
 const ErroHandler = require('../utils/ErroHandler')
 
 router.post('/', PedidoMid)
@@ -24,6 +24,24 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+// Obtem todos os pedidos com todos os dados
+router.get('/tudo/:id', async (req, res) => {
+    const pedido = await Pedidos.findByPk(req.params.id, {
+        include: [
+            {model: Transportadoras},
+            {model: Fornecedores},
+            {model: Clientes}
+        ],
+        raw: true,
+        nest: true
+    })
+    if(pedido){
+        res.json(pedido)
+    }else{
+        res.status(400).json({msg: 'Pedido não Encontrado'})
+    }
+})
+
 // Posters
 // Registra um pedido
 router.post('/', async (req, res, next) =>{
@@ -31,27 +49,28 @@ router.post('/', async (req, res, next) =>{
     let minhaData = data.toISOString();
     minhaData = minhaData.replace("T"," ")
     minhaData = minhaData.slice(0, 19)
-    
-    
     const dt_Pedido = minhaData
 
-    const pedido = {Dt_Pedido: dt_Pedido,
+    const pedido = {dt_Pedido: dt_Pedido,
                     produto_id: req.body.produto_id,
-                    fornecedor_cod: req.body.fornecedor_cod,
-                    taxa_cod: req.body.taxa_cod,
-                    cliente_cod: req.body.cliente_cod,
+                    fornecedor_cnpj: req.body.fornecedor_cnpj,
+                    cliente_cnpj: req.body.cliente_cnpj,
                     transportadora_cod: req.body.transportadora_cod,
                     frm_pagamento: req.body.frm_pagamento,
                     local: req.body.local,
                     prioridade: req.body.prioridade,
                 }
     
+    const api_cnpj_url = "https://api.cnpjs.dev/v1/"
+
+    const transportadora = {}
+    const fornecedor = {}
+    const cliente = {}
     try {
         const pedidoSalvo = await Pedidos.create(pedido)
         res.json({msg: 'Pedido adicionado com sucesso', pedidoId: pedidoSalvo.id})
     } catch (error) {
-        //next(new ErroHandler(500, 'falha interna ao adicionar o pedido'))
-        res.status(500).json({msg: 'Falha interna ao adicionar pedido', erro: error, pedido: pedido})
+        next(new ErroHandler(500, 'Falha interna ao adicionar o pedido'))
     }
 })
 
@@ -61,11 +80,16 @@ router.put('/', async (req, res) =>{
     const pedido = await Pedidos.findByPk(req.query.id)
     if(pedido){
         pedido.dt_Pedido = req.body.dt_Pedido
+        
         pedido.produto_id = req.body.produto_id
-        pedido.fornecedor_cod = req.body.fornecedor_cod
+        
+        pedido.fornecedor_cnpj = req.body.fornecedor_cod
+        
         pedido.taxa_cod = req.body.taxa_cod
-        pedido.cliente_cod = req.body.cliente_cod
-        pedido.transportadora_cod = req.body.transportadora_cod
+        
+        pedido.cliente_cnpj = req.body.cliente_cod
+        pedido.transportadora_cnpj = req.body.transportadora_cod
+        
         pedido.frm_pagamento = req.body.frm_pagamento
         pedido.local = req.body.local
         pedido.prioridade = req.body.prioridade
