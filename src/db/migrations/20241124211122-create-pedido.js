@@ -12,26 +12,45 @@ module.exports = {
       dt_Pedido: {
         type: Sequelize.STRING
       },
-      produto_id: {
-        type: Sequelize.INTEGER
+      fk_usuario: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Usuarios',
+          key: 'id'
+        }
       },
-      fornecedor_cnpj: {
-        type: Sequelize.INTEGER
+      fk_fornecedor: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Fornecedors',
+          key: 'id'
+        }
       },
-      cliente_cnpj: {
-        type: Sequelize.INTEGER
+      fk_transportadora: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Transportadoras',
+          key: 'id'
+        }
       },
-      transportadora_cod: {
-        type: Sequelize.INTEGER
+      fk_cliente: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Clientes',
+          key: 'id'
+        }
       },
-      frm_pagamento: {
+      tipo_pedido: {
         type: Sequelize.STRING
       },
       local: {
         type: Sequelize.STRING
       },
+      forma_pgto: {
+        type: Sequelize.STRING
+      },
       prioridade: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

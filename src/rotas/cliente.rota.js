@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const ClienteMid = require('../middleware/validarCliente.middleware')
-const { Clientes } = require('../db/models')
+const { Cliente } = require('../db/models')
 const ErroHandler = require('../utils/ErroHandler')
 
 router.post('/', ClienteMid)
@@ -10,13 +10,13 @@ router.put('/', ClienteMid)
 // Getters
 // Obtem todos os clientes
 router.get('/', async (req, res) => {
-    const clientes = await Clientes.findAll()
+    const clientes = await Cliente.findAll()
     res.json({clientes: clientes})
 })
 
 // Obtem um cliente pelo id
 router.get('/:id', async (req, res) => {
-    const cliente = await Clientes.findByPk(req.params.id)
+    const cliente = await Cliente.findByPk(req.params.id)
     if(cliente){
         res.json(cliente)
     }else{
@@ -33,7 +33,7 @@ router.post('/', async (req, res, next) =>{
     //const api_cnpj_url = "https://api.cnpjs.dev/v1/"
 
     try {
-        const clienteSalvo = await Clientes.create(cliente)
+        const clienteSalvo = await Cliente.create(cliente)
         res.json({msg: 'Cliente adicionado com sucesso', clienteId: clienteSalvo.id})
     } catch (error) {
         next(new ErroHandler(500, 'Falha interna ao adicionar o cliente'))
@@ -43,7 +43,7 @@ router.post('/', async (req, res, next) =>{
 // Puts
 // Atualiza os dados de um cliente
 router.put('/', async (req, res) =>{
-    const cliente = await Clientes.findByPk(req.query.id)
+    const cliente = await Cliente.findByPk(req.query.id)
     if(cliente){
         cliente = req.body
 
@@ -57,7 +57,7 @@ router.put('/', async (req, res) =>{
 // Deleters
 // Deleta um cliente pelo id
 router.delete('/', async (req, res) =>{
-    const cliente = await Clientes.findByPk(req.query.id)
+    const cliente = await Cliente.findByPk(req.query.id)
     if(cliente){
         await cliente.destroy()
         res.json({msg: 'Cliente deletado'})

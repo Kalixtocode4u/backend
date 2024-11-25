@@ -12,15 +12,12 @@ module.exports = {
       cnpj: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       nome: {
         type: Sequelize.STRING
       },
-      endereço: {
-        type: Sequelize.STRING
-      },
-      telefone: {
+      endereco: {
         type: Sequelize.STRING
       },
       createdAt: {

@@ -14,6 +14,7 @@ POST http://localhost:5000/api/transportadoras
 content-type: application/json
 
 {
+    "cnpj": 33000167100246
 }
 
 ###

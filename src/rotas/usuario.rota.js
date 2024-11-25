@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const usuarioMid = require('../middleware/validarUsuario.middleware')
-const { Usuarios } = require('../db/models')
+const { Usuario } = require('../db/models')
 const jweb = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
@@ -9,15 +9,15 @@ router.post('/', usuarioMid)
 router.put('/', usuarioMid)
 
 // Getters
-// Obtem todos os Usuarios
+// Obtem todos os Usuario
 router.get('/', async (req, res) => {
-    const usuarios =  await Usuarios.findAll()
+    const usuarios =  await Usuario.findAll()
     res.json(usuarios)
 })
 
 // Obtem um usuario pelo id
 router.get('/:id', async (req, res) => {
-    const usuario = await Usuarios.findByPk(req.params.id)
+    const usuario = await Usuario.findByPk(req.params.id)
     if(usuario){
         res.json({usuario: usuario})
     }else{
@@ -36,7 +36,7 @@ router.post('/', async (req, res) =>{
     const senhaCryptada =  await bcrypt.hash(senha, salt)
     
     const usuario = {nome: nome, email: email, senha: senhaCryptada}
-    const usuarioSalvo = await Usuarios.create(usuario)
+    const usuarioSalvo = await Usuario.create(usuario)
     res.json({msg: 'Usuario adicionado com sucesso', userId: usuarioSalvo.id})
 })
 
@@ -44,7 +44,7 @@ router.post('/login', async (req, res) =>{
     const email = req.body.email
     const senha = req.body.senha
 
-    const usuario = await Usuarios.findOne({where: {email: email}})
+    const usuario = await Usuario.findOne({where: {email: email}})
 
     if(usuario && bcrypt.compare(senha, usuario.senha)){
 
@@ -59,7 +59,7 @@ router.post('/login', async (req, res) =>{
 // Puts
 // Atualiza os dados de um usuario
 router.put('/', async (req, res) => {
-    const usuario = await Usuarios.findByPk(req.query.id)
+    const usuario = await Usuario.findByPk(req.query.id)
     if(usuario){
         usuario.nome = req.body.nome;
         usuario.email = req.body.email;
@@ -80,7 +80,7 @@ router.put('/', async (req, res) => {
 // Deleters
 // Deleta um usuario pelo id
 router.delete('/', async (req, res) => {
-    const usuario = await Usuarios.findByPk(req.query.id)
+    const usuario = await Usuario.findByPk(req.query.id)
     if(usuario){
         await usuario.destroy();
         res.json({msg: 'Usuario deletado'})

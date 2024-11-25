@@ -1,10 +1,11 @@
 module.exports = {
     type: "object",
     properties: {
+        cnpj: {type: "integer"},
         nome: {type: "string"},
         endereco: {type: "string"},
         telefone: {type: "string"},
     },
-    required: ["nome", "endereco", "telefone"],
+    required: ["cnpj"],
     additionalProperties: false,
 }

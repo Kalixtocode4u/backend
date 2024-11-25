@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const produtoMid = require('../middleware/validarProduto.middleware')
 const ErroHandler = require('../utils/ErroHandler')
-const { Produtos } = require('../db/models')
+const { Produto } = require('../db/models')
 
 router.post('/', produtoMid)
 router.put('/', produtoMid)
@@ -10,13 +10,13 @@ router.put('/', produtoMid)
 // Getters
 // Obtem todos os produtos
 router.get('/', async (req, res) => {
-    const produtos = await Produtos.findAll()
+    const produtos = await Produto.findAll()
     res.json(produtos)
 })
 
 // Obtem um produto pelo id
 router.get('/:id', async (req, res) => {
-    const produto = await Produtos.findByPk(req.params.id)
+    const produto = await Produto.findByPk(req.params.id)
     if(produto){
         res.json(produto)
     }else{
@@ -34,7 +34,7 @@ router.post('/', async (req, res) =>{
 
     const produto = {nome: nome, descricao: descricao, quantidade: quantidade, preco: preco}
     try {
-        const produtoSalvo = await Produtos.create(produto)
+        const produtoSalvo = await Produto.create(produto)
         res.json({msg: 'Produto adicionado com sucesso', produtoId: produtoSalvo.id})
     } catch (error) {
         next(new ErroHandler(500, 'falha interna ao adicionar o produto'))
@@ -44,7 +44,7 @@ router.post('/', async (req, res) =>{
 // Puts
 // Atualiza os dados de um produto
 router.put('/', async (req, res) =>{
-    const produto = await Produtos.findByPk(req.query.id)
+    const produto = await Produto.findByPk(req.query.id)
     if(produto){
         produto.nome = req.body.nome
         produto.descricao = req.body.descricao
@@ -61,7 +61,7 @@ router.put('/', async (req, res) =>{
 // Deleters
 // Deleta um produto pelo id
 router.delete('/', async (req, res) =>{
-    const produto = await Produtos.findByPk(req.query.id)
+    const produto = await Produto.findByPk(req.query.id)
     if(produto){
         await produto.destroy()
         res.json({msg: 'Produto deletado'})

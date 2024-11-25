@@ -14,9 +14,9 @@ POST http://localhost:5000/api/usuarios
 content-type: application/json
 
 {
-    "nome": "karam",
-    "email": "readit@email.com",
-    "senha": "salgado"
+    "nome": "cdrlos",
+    "email": "cdrlos@email.com",
+    "senha": "fortissimaSenha"
 }
 
 ###
