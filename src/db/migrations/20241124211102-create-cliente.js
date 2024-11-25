@@ -18,7 +18,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       insc_estadual: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       nome: {
         type: Sequelize.STRING
