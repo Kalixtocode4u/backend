@@ -11,16 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Preco_final.belongsTo(models.Pedido, {foreignKey: 'fk_pedido'})
-      //Preco_final.belongsToMany(models.Produto, {through: 'PedidoProdutoHasPrecoFinal', foreignKey: 'fk_pedido'})
       Preco_final.hasMany(models.Pedido_produto, {foreignKey: 'fk_pedido'})
     }
   }
   Preco_final.init({
     fk_pedido: DataTypes.INTEGER,
-    fk_pedido_produtos: DataTypes.INTEGER,
+    fk_pedido_produto: DataTypes.INTEGER,
     margem: DataTypes.DECIMAL,
     frete: DataTypes.DECIMAL,
-    imposto: DataTypes.DECIMAL
+    imposto: DataTypes.DECIMAL,
+    total: DataTypes.DECIMAL
   }, {
     sequelize,
     modelName: 'Preco_final',

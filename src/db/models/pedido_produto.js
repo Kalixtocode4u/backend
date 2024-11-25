@@ -11,14 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Pedido_produto.belongsTo(models.Pedido, { foreignKey: 'fk_pedido'})
-      Pedido_produto.belongsToMany(models.Preco_final, {through: 'PedidoProdutoHasPrecoFinal', foreignKey: 'fk_produto'})
-      Pedido_produto.belongsTo(models.Produto, {foreignKey: 'fk_pedido'})
+      Pedido_produto.belongsTo(models.Produto, {foreignKey: 'fk_produto'})
     }
   }
   Pedido_produto.init({
     fk_pedido: DataTypes.INTEGER,
     fk_produto: DataTypes.INTEGER,
-    quantidade: DataTypes.INTEGER
+    quantidade: DataTypes.INTEGER,
+    total: DataTypes.DECIMAL
   }, {
     sequelize,
     modelName: 'Pedido_produto',

@@ -1,54 +1,28 @@
 const express = require('express')
 const router = express.Router();
-const PedidoMid = require('../middleware/validarPedido.middleware')
-const { Pedido, Transportadora, Cliente, Fornecedor, Preco_final, Pedido_produto, Produto } = require('../db/models')
+const Preco_finalMid = require('../middleware/validarPreco_final.middleware')
+const { Preco_final } = require('../db/models')
 //const ErroHandler = require('../utils/ErroHandler')
 // api_cnpj_url = "https://api.cnpjs.dev/v1/"
-router.post('/', PedidoMid)
-router.put('/', PedidoMid)
+router.post('/', Preco_finalMid)
+router.put('/', Preco_finalMid)
 
 // Getters
 // Obtem todos os pedidos
 router.get('/', async (req, res) => {
-    const pedidos = await Pedido.findAll()
-    res.json({pedidos: pedidos})
+    const precosFinal = await Preco_final.findAll()
+    res.json({precosFinal: precosFinal})
 })
 
 // Obtem os os pedidos com todos os dados
 router.get('/:id', async (req, res) => {
-    const precoFinal = await Preco_final.findAll({
-        where: {fk_pedido: req.params.id},
-        include: [
-            {
-            model: Pedido,
-            include: [
-                {model: Transportadora},
-                {model: Fornecedor},
-                {model: Cliente}
-            ]},
-            //{model: Pedido_produto}
-        ],
-        raw: true,
-        nest: true
-    })
-
-    const Pedido_Produtos = await Pedido_produto.findAll(
-        {
-        where: {
-            fk_pedido: req.params.id
-        },
-        include: {model: Produto},
-        raw: true,
-        nest: true
-        })
-
-    const PedidoFinal = {Precofinal: precoFinal, Pedido_Produtos: Pedido_Produtos}
+    const precoFinal = await Preco_final.findByPk(req.params.id)
     
 
-    if(PedidoFinal){
-        res.json(PedidoFinal)
+    if(precoFinal){
+        res.json(precoFinal)
     }else{
-        res.status(400).json({msg: 'Pedido não Encontrado'})
+        res.status(400).json({msg: 'Preco final não localizado'})
     }
 })
 
@@ -110,12 +84,12 @@ router.put('/', async (req, res) =>{
 // Deleters
 // Deleta um pedido pelo id
 router.delete('/', async (req, res) =>{
-    const pedido = await Pedido.findByPk(req.query.id)
-    if(pedido){
-        await pedido.destroy()
-        res.json({msg: 'Pedido deletado'})
+    const precoFinal = await Preco_final.findByPk(req.query.id)
+    if(precoFinal){
+        await precoFinal.destroy()
+        res.json({msg: 'Preço final deletado'})
     }else{
-        res.status(400).json({msg: 'Pedido não encontrado'})
+        res.status(400).json({msg: 'Preço final não encontrado'})
     }
 })
 

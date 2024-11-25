@@ -1,52 +1,26 @@
 const express = require('express')
 const router = express.Router();
-const PedidoMid = require('../middleware/validarPedido.middleware')
-const { Pedido, Transportadora, Cliente, Fornecedor, Preco_final, Pedido_produto, Produto } = require('../db/models')
+const Pedido_produtoMid = require('../middleware/validarPedido_produto.middleware')
+const { Pedido_produto} = require('../db/models')
 //const ErroHandler = require('../utils/ErroHandler')
 // api_cnpj_url = "https://api.cnpjs.dev/v1/"
-router.post('/', PedidoMid)
-router.put('/', PedidoMid)
+router.post('/', Pedido_produtoMid)
+router.put('/', Pedido_produtoMid)
 
 // Getters
 // Obtem todos os pedidos
 router.get('/', async (req, res) => {
-    const pedidos = await Pedido.findAll()
-    res.json({pedidos: pedidos})
+    const pedidoProdutos = await Pedido_produto.findAll()
+    res.json({pedidoProdutos: pedidoProdutos})
 })
 
 // Obtem os os pedidos com todos os dados
 router.get('/:id', async (req, res) => {
-    const precoFinal = await Preco_final.findAll({
-        where: {fk_pedido: req.params.id},
-        include: [
-            {
-            model: Pedido,
-            include: [
-                {model: Transportadora},
-                {model: Fornecedor},
-                {model: Cliente}
-            ]},
-            //{model: Pedido_produto}
-        ],
-        raw: true,
-        nest: true
-    })
-
-    const Pedido_Produtos = await Pedido_produto.findAll(
-        {
-        where: {
-            fk_pedido: req.params.id
-        },
-        include: {model: Produto},
-        raw: true,
-        nest: true
-        })
-
-    const PedidoFinal = {Precofinal: precoFinal, Pedido_Produtos: Pedido_Produtos}
+    const pedidoProduto = await Pedido_produto.findByPk(req.params.id)
     
 
-    if(PedidoFinal){
-        res.json(PedidoFinal)
+    if(precoFinal){
+        res.json(pedidoProduto)
     }else{
         res.status(400).json({msg: 'Pedido não Encontrado'})
     }
@@ -110,9 +84,9 @@ router.put('/', async (req, res) =>{
 // Deleters
 // Deleta um pedido pelo id
 router.delete('/', async (req, res) =>{
-    const pedido = await Pedido.findByPk(req.query.id)
-    if(pedido){
-        await pedido.destroy()
+    const pedidoProduto = await Pedido_produto.findByPk(req.query.id)
+    if(pedidoProduto){
+        await pedidoProduto.destroy()
         res.json({msg: 'Pedido deletado'})
     }else{
         res.status(400).json({msg: 'Pedido não encontrado'})

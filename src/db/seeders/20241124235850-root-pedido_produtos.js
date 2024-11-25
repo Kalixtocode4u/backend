@@ -7,6 +7,7 @@ module.exports = {
       fk_pedido: 1,
       fk_produto: 1,
       quantidade: 30,
+      total: 7950,
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -14,6 +15,7 @@ module.exports = {
       fk_pedido: 1,
       fk_produto: 2,
       quantidade: 1,
+      total: 29.20,
       createdAt: new Date(),
       updatedAt: new Date()
     }])

@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Pedido.belongsTo(models.Fornecedor, {foreignKey: 'fk_fornecedor'})
       Pedido.belongsTo(models.Transportadora, {foreignKey: 'fk_transportadora'})
       Pedido.belongsTo(models.Cliente, {foreignKey: 'fk_cliente'})
-      //Pedido.hasMany(models.Produto)
+      Pedido.hasMany(models.Pedido_produto, {foreignKey: 'fk_pedido'})
     }
   }
   Pedido.init({

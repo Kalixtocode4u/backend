@@ -3,9 +3,8 @@ module.exports = {
     properties: {
         cnpj: {type: "integer"},
         nome: {type: "string"},
-        endereco: {type: "string"},
-        telefone: {type: "string"},
+        endereco: {type: "string"}
     },
-    required: ["cnpj"],
+    required: ["cnpj","nome","endereco"],
     additionalProperties: false,
 }

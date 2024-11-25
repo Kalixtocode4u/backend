@@ -16,7 +16,7 @@ module.exports = {
           key: 'id'
         }
       },
-      fk_pedido_produtos: {
+      fk_pedido_produto: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Pedido_produtos',
@@ -31,6 +31,9 @@ module.exports = {
       },
       imposto: {
         type: Sequelize.DECIMAL(3,2)
+      },
+      total: {
+        type: Sequelize.DECIMAL(10,2)
       },
       createdAt: {
         allowNull: false,

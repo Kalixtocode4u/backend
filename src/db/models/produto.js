@@ -10,13 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Produto.belongsTo(models.Pedido_produto, {foreignKey: 'id'})
-      //Produto.belongsToMany(models.Preco_final, {as: 'um',through: models.Pedido_produto, foreignKey: 'fk_produto'})
+      
     }
   }
   Produto.init({
     descricao: DataTypes.STRING,
-    preco_unit: DataTypes.DECIMAL
+    preco_unit: DataTypes.DECIMAL,
   }, {
     sequelize,
     modelName: 'Produto',

@@ -5,7 +5,7 @@ const ProdutoSchema = require('../schemas/produtos.schema');
 
 addFormat(ajv);
 
-function validarUProduto(req, res, next){
+function validarProduto(req, res, next){
     const produto = req.body
     const validate = ajv.compile(ProdutoSchema)
     const valid = validate(produto);
@@ -16,4 +16,4 @@ function validarUProduto(req, res, next){
     }
 }
 
-module.exports = validarUProduto;
+module.exports = validarProduto;
