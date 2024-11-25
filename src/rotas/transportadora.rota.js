@@ -25,8 +25,8 @@ router.get('/:id', async (req, res) => {
 })
 
 // Obtem todos os transportadoras com todos os dados
-router.get('/tudo/:cnpj', async (req, res) => {
-    const transportadora = await Transportadora.findByPk(req.params.cnpj)
+router.get('/:id', async (req, res) => {
+    const transportadora = await Transportadora.findByPk(req.params.id)
     
     if(transportadora){
         res.json(transportadora)
@@ -37,11 +37,24 @@ router.get('/tudo/:cnpj', async (req, res) => {
 
 // Posters
 // Registra um transportadora
-router.post('/', async (req, res, next) => {
+router.post('/teste', async (req, res, next) => {
 
     const transportadora = req.body
 
     const transportadoraProcessada = consultaTransportadora(transportadora)
+
+    try {
+        const transportadoraSalvo = await Transportadora.create(transportadoraProcessada)
+        res.json({msg: 'Transportadora adicionado com sucesso', transportadoraId: transportadoraSalvo.id})
+    } catch (error) {
+        //next(new erroHandler(500, 'Falha interna ao adicionar o transportadora'))
+        res.status(500).json({msg: 'Falha interna ao adicionar o transportadora', transportadora: transportadora})
+    }
+})
+
+router.post('/', async (req, res, next) => {
+
+    const transportadora = req.body
 
     try {
         const transportadoraSalvo = await Transportadora.create(transportadora)

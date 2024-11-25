@@ -27,7 +27,7 @@ router.get('/:id', async (req, res) => {
 
 // Posters
 // Registra um fornecedor
-router.post('/', async (req, res, next) =>{
+router.post('/teste', async (req, res, next) =>{
 
     const fornecedor = req.body
     
@@ -35,6 +35,18 @@ router.post('/', async (req, res, next) =>{
 
     try {
         const fornecedorSalvo = await Fornecedor.create(fornecedorProcessado)
+        res.json({msg: 'Fornecedor adicionado com sucesso', fornecedorId: fornecedorSalvo.id})
+    } catch (error) {
+        next(new ErroHandler(500, 'Falha interna ao adicionar o fornecedor'))
+    }
+})
+
+router.post('/', async (req, res, next) =>{
+
+    const fornecedor = req.body
+
+    try {
+        const fornecedorSalvo = await Fornecedor.create(fornecedor)
         res.json({msg: 'Fornecedor adicionado com sucesso', fornecedorId: fornecedorSalvo.id})
     } catch (error) {
         next(new ErroHandler(500, 'Falha interna ao adicionar o fornecedor'))

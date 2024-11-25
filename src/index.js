@@ -6,7 +6,8 @@ const rotaPedido = require('./rotas/Pedido.rota')
 const rotaFornecedor = require('./rotas/fornecedor.rota')
 const rotaCliente = require('./rotas/cliente.rota')
 const rotaTransportadora = require('./rotas/transportadora.rota')
-//const rotaPedido_produto = require('./rotas/Pedido_produto.rota')
+const rotaPedido_produto = require('./rotas/Pedido_produto.rota')
+const rotaPreco_final = require('./rotas/Preco_final.rota')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 require('dotenv').config()
@@ -31,7 +32,9 @@ app.use('/api/fornecedores', rotaFornecedor)
 
 app.use('/api/transportadoras', rotaTransportadora)
 
-//app.use('/api/pedido_produto', rotaPedido_produto)
+app.use('/api/pedido_produtos', rotaPedido_produto)
+
+app.use('/api/precos_final', rotaPreco_final)
 
 app.listen(5000, () => {
     console.log('servidor aberto na porta 5000')

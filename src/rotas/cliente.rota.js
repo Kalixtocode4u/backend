@@ -26,13 +26,24 @@ router.get('/:id', async (req, res) => {
 
 // Posters
 // Registra um cliente
-router.post('/', async (req, res, next) =>{
+router.post('/teste', async (req, res, next) =>{
     const cliente = req.body
 
     const clienteProcessado = consultaCliente(cliente)
 
     try {
         const clienteSalvo = await Cliente.create(clienteProcessado)
+        res.json({msg: 'Cliente adicionado com sucesso', clienteId: clienteSalvo.id})
+    } catch (error) {
+        next(new ErroHandler(500, 'Falha interna ao adicionar o cliente'))
+    }
+})
+
+router.post('/', async (req, res, next) =>{
+    const cliente = req.body
+
+    try {
+        const clienteSalvo = await Cliente.create(cliente)
         res.json({msg: 'Cliente adicionado com sucesso', clienteId: clienteSalvo.id})
     } catch (error) {
         next(new ErroHandler(500, 'Falha interna ao adicionar o cliente'))

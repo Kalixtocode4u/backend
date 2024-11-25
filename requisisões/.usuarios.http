@@ -15,8 +15,8 @@ content-type: application/json
 
 {
     "nome": "cdrlos",
-    "email": "cdrlos@email.com",
-    "senha": "fortissimaSenha"
+    "email": "admin@pse.com.br",
+    "senha": "123456"
 }
 
 ###
@@ -25,8 +25,8 @@ POST http://localhost:5000/api/usuarios/login
 content-type: application/json
 
 {
-    "email": "filmeDoPele@email.com",
-    "senha": "hexacampeao"
+    "email": "admin@pse.com.br",
+    "senha": "123456"
 }
 
 ###
