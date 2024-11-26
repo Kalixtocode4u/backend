@@ -4,18 +4,18 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Clientes', [{
-      cnpj: '42343785000145',
-      cpf: '293.823.932-33',
-      insc_estadual: '00000003464539',
-      nome: 'MANOS POCOS ARTESIANOS LTDA',
-      endereço: 'RUA CRUZEIRO DO SUL, N° 2228; SÃO PEDRO -  JI-PARANÁ',
-      contato: '~~~',
+      cnpj: '09876543211234',
+      cpf: '123.223.323-23',
+      insc_estadual: '00000001234567',
+      nome: 'KOLBE ELETRICA LTDA',
+      endereço: 'RUA DUDAO DO SUL, N° 1505; SÃO PELEGOLAS -  PATI PA',
+      contato: '8998-8899',
       createdAt: new Date(),
       updatedAt: new Date()
     }])
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Clientes', [{cnpj: '42343785000145'}])
+    await queryInterface.bulkDelete('Clientes', [{cnpj: '09876543211234'}])
   }
 };

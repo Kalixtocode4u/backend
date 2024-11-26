@@ -2,7 +2,7 @@ GET http://localhost:5000
 
 ###
 
-GET http://localhost:5000/api/pedido_produtos
+GET http://localhost:5000/api/precos_final
 
 ###
 
